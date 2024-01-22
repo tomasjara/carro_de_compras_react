@@ -15,14 +15,14 @@ export const CarroDeCompra = () => {
 
     return (
         <>
-            <button className="btn d-lg-none position-relative " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+            <button className="btn d-xxl-none position-relative " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
                 <img src={carroCompra} width={'30px'} />
                 <div className='position-absolute border border-black rounded-circle px-2 bg-dark' style={{ bottom: '-5px', right: '0px' }}>
                     <span className='fw-bold fs' style={{ color: 'white' }}>{cantidadProductosCarro}</span>
                 </div>
             </button>
 
-            <div className="offcanvas-lg offcanvas-end" tabIndex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+            <div className="offcanvas-xxl offcanvas-end d-xxl-none" tabIndex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
                 <div className="offcanvas-header">
                     <h5 className="offcanvas-title" id="offcanvasResponsiveLabel">Carrito de compras 🛒</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
