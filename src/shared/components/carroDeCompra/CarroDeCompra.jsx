@@ -1,10 +1,11 @@
-import React from 'react'
-import carroCompra from '../../imgs/iconos/carro_compra.svg'
 import { useCarroCompraContext } from '../../../context/useCarroCompraContext'
+import carroCompra from '../../imgs/iconos/carro_compra.svg'
+import { useState } from 'react'
 import { TarjetaProductoCarroCompra } from './components/TarjetaProductoCarroCompra'
 import { formatearMonedaChilena } from '../../../pages/listado_productos/utils/formatearMonedaChilena'
 
-export const CarroDeCompra = () => {
+export const CarroDeCompra = ({ titulo = 'Titulo de ejemplo' }) => {
+    const [mostarMenu, setMostrarMenu] = useState(false)
 
     const { carro, limpiarCarro, cantidadProductosCarro, precioTotal } = useCarroCompraContext()
 
@@ -13,21 +14,40 @@ export const CarroDeCompra = () => {
         limpiarCarro()
     }
 
+    const cerrarAbrilMenuLateral = () => {
+        setMostrarMenu(prevState => !prevState)
+    }
+
+    const cerrarAlHacerCLickAfuera = (e) => {
+        if (e.target.getAttribute('name') === 'carrito-container') return cerrarAbrilMenuLateral()
+    }
+
     return (
         <>
-            <button className="btn d-xxl-none position-relative " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
-                <img src={carroCompra} width={'30px'} />
-                <div className='position-absolute border border-black rounded-circle px-2 bg-dark' style={{ bottom: '-5px', right: '0px' }}>
-                    <span className='fw-bold fs' style={{ color: 'white' }}>{cantidadProductosCarro}</span>
-                </div>
-            </button>
+            <div className='d-flex justify-content-end'>
+                <button className="btn" onClick={cerrarAbrilMenuLateral}>
+                    <label htmlFor="btn-menu"><img src={carroCompra} alt="" width={'35px'} /></label>
+                </button>
+            </div>
 
-            <div className="offcanvas-xxl offcanvas-end d-xxl-none" tabIndex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
-                <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasResponsiveLabel">Carrito de compras 🛒</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
-                </div>
-                <div className="offcanvas-body p-0">
+            <div
+                name={'carrito-container'}
+                className={`position-absolute w-100 vh-100 top-0 end-0 ${mostarMenu ? 'visible ' : 'visually-hidden '}`}
+                style={{ background: 'rgba(0, 0, 0, 0.5)', zIndex: '99' }}
+                onClick={cerrarAlHacerCLickAfuera}
+            >
+                <div
+                    className="top-0 end-0 position-absolute bg-white w-100 vh-100"
+                    style={{ maxWidth: '399px', zIndex: '999' }}
+                >
+                    <div className='d-flex align-items-center justify-content-between p-3'>
+                        <h4 className='mb-0'>{titulo}</h4>
+                        <label
+                            className=''
+                            style={{ cursor: 'pointer' }}
+                            onClick={cerrarAbrilMenuLateral}
+                        >✖️</label>
+                    </div>
                     <hr className='m-0' />
                     <div className='p-3'>
                         {carro.length > 0
@@ -45,7 +65,6 @@ export const CarroDeCompra = () => {
                                 <p>Carro vacío, vuelve a la tienda para agregar productos. 💸</p>
                             </div>
                         }
-
                     </div>
                 </div>
             </div>
