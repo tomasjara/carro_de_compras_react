@@ -4,7 +4,7 @@ import { SideBar } from '../sidebar/SideBar'
 export const Header = () => {
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg bg-warning shadow-sm ">
                 <div className="container">
                     <SideBar
                         titulo='Menu'
