@@ -1,25 +1,49 @@
-import React from 'react'
+import { useState } from 'react'
 
-export const SideBar = () => {
+export const SideBar = ({ id = 'sidebar-exmaple', titulo = 'Sidebar de ejemplo', direccion = 'end', children }) => {
+    const [mostarMenu, setMostrarMenu] = useState(false)
 
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
+    const cerrarAbrilMenuLateral = () => {
+        setMostrarMenu(prevState => !prevState)
+        document.body.style.overflow = mostarMenu ? 'auto' : 'hidden'
     }
 
-    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
+    const cerrarAlHacerCLickAfuera = (e) => {
+        if (e.target.getAttribute('name') === id) return cerrarAbrilMenuLateral()
     }
 
     return (
-        <div id="mySidenav" className="sidenav">
-            <a href="javascript:void(0)" className="closebtn" onclick={closeNav}>&times;</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
-        </div>
+        <>
+            <div className='d-flex justify-content-end'>
+                <button className="btn" onClick={cerrarAbrilMenuLateral}>
+                    <label htmlFor="btn-menu">Icono de sidebar</label>
+                </button>
+            </div>
+
+            <div
+                name={id}
+                className={`position-fixed vw-100 vh-100 top-0 start-0 ${mostarMenu ? 'visible ' : 'visually-hidden-focusable'}`}
+                style={{ background: 'rgba(0, 0, 0, 0.5)', zIndex: '99',overflowX: 'hidden' }}
+                onClick={cerrarAlHacerCLickAfuera}
+            >
+                <div
+                    className={`position-absolute top-0 ${direccion}-0 bg-white w-100 min-vh-100`}
+                    style={{ maxWidth: '399px', zIndex: '999'}}
+                >
+                    <div className='d-flex align-items-center justify-content-between p-3'>
+                        <h4 className='mb-0'>{titulo}</h4>
+                        <label
+                            className=''
+                            style={{ cursor: 'pointer' }}
+                            onClick={cerrarAbrilMenuLateral}
+                        >✖️</label>
+                    </div>
+                    <hr className='m-0' />
+                    <div className='p-3'>
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }

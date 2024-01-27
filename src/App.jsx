@@ -4,10 +4,10 @@ import { Header } from './shared/components/header/Header'
 function App() {
 
   return (
-    <div>
+    <>
       <Header />
       <PaginaInicio />
-    </div>
+    </>
   )
 }
 

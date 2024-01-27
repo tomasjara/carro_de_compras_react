@@ -16,6 +16,8 @@ export const CarroDeCompra = ({ titulo = 'Titulo de ejemplo' }) => {
 
     const cerrarAbrilMenuLateral = () => {
         setMostrarMenu(prevState => !prevState)
+        document.body.style.overflow = mostarMenu ? 'auto' : 'hidden'
+
     }
 
     const cerrarAlHacerCLickAfuera = (e) => {
@@ -32,12 +34,12 @@ export const CarroDeCompra = ({ titulo = 'Titulo de ejemplo' }) => {
 
             <div
                 name={'carrito-container'}
-                className={`position-absolute w-100 vh-100 top-0 end-0 ${mostarMenu ? 'visible ' : 'visually-hidden '}`}
-                style={{ background: 'rgba(0, 0, 0, 0.5)', zIndex: '99' }}
+                className={`position-fixed vw-100 vh-100 top-0 start-0 ${mostarMenu ? 'visible ' : 'visually-hidden-focusable'}`}
+                style={{ background: 'rgba(0, 0, 0, 0.5)', zIndex: '99', overflowX: 'hidden' }}
                 onClick={cerrarAlHacerCLickAfuera}
             >
                 <div
-                    className="top-0 end-0 position-absolute bg-white w-100 vh-100"
+                    className="top-0 end-0 position-absolute bg-white w-100 min-vh-100 "
                     style={{ maxWidth: '399px', zIndex: '999' }}
                 >
                     <div className='d-flex align-items-center justify-content-between p-3'>

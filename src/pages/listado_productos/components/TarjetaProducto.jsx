@@ -13,7 +13,7 @@ export const TarjetaProducto = ({ producto }) => {
   }
 
   return (
-    <div className='col '>
+    <div className='col'>
       <div className='card'>
         <img className='card-img-top' src={imageurl} alt="" width={'200px'} />
         <div className="card-body">
