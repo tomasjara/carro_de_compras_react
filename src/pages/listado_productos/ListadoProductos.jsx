@@ -16,10 +16,11 @@ export const ListadoProductos = () => {
 
     return (
         <>
-            {/* <h1 className='text-center my-3'>Listado productos</h1> */}
+            <h1 className='text-center my-3'>Listado productos</h1>
             <FiltradoProductos
                 setProductosFiltrados={setProductosFiltrados}
                 productos={response} />
+
             <div className='container my-2'>
                 <RenderizadoCondicional
                     LoadingState={loading}
