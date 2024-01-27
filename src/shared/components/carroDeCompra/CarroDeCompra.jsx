@@ -28,7 +28,7 @@ export const CarroDeCompra = ({ titulo = 'Titulo de ejemplo' }) => {
         <>
             <div className='d-flex justify-content-end'>
                 <button className="btn" onClick={cerrarAbrilMenuLateral}>
-                    <label htmlFor="btn-menu"><img src={carroCompra} alt="" width={'35px'} /></label>
+                    <img src={carroCompra} alt="" width={'35px'} />
                 </button>
             </div>
 
